@@ -1,0 +1,14 @@
+A funcao foi acessada as 2022-06-11 15:04:45.353982 horas.
+Com o resultado 15
+A funcao foi acessada as 2022-06-11 15:05:04.852984 horas.
+Com o resultado 15
+A funcao foi acessada as 2022-06-11 15:05:25.410984 horas.
+Com o resultado 15
+A funcao foi acessada as 2022-06-11 15:09:38.630379 horas.
+Com o resultado 15
+A funcao foi acessada as 2022-06-11 15:15:40.570052 horas.
+Com o resultado 67
+A funcao foi acessada as 2022-06-11 15:30:38.821382 horas.
+Com o resultado 67
+A funcao foi acessada as 2022-06-11 15:38:18.126712 horas.
+Com o resultado 231
