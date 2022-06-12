@@ -35,11 +35,17 @@ while True:
         case 2:
             print(tarefas)
         case 3:
-            cache.append(tarefas[-1])
-            tarefas.pop(-1)
+            if tarefas:
+                cache.append(tarefas[-1])
+                tarefas.pop(-1)
+            else:
+                print(f"{cores[1]}Nada para desfazer{cores[0]}")
         case 4:
-            tarefas.append(cache[-1])
-            cache.pop(-1)
+            if cache:
+                tarefas.append(cache[-1])
+                cache.pop(-1)
+            else:
+                print(f"{cores[1]}Nada a refazer{cores[0]}")
         case 0:
             break
         case default:
