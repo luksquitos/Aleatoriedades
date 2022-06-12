@@ -4,10 +4,10 @@ from datetime import datetime
 
 
 def master(func):
-    def decorador(*args, **kwargs):
+    def decorador(*args, ler=False):
         # if not kwargs: #Isso está falando que se não tiver kwargs (BUG)
-        if not kwargs['ler']:
-            execute = func(*args, **kwargs)
+        if not ler:
+            execute = func(*args)
             try:
                 with open("registro.txt", "a") as registro:
                     registro.write(f"A funcao foi acessada as {datetime.now()} horas.\nCom o resultado {execute}\n")               
@@ -23,13 +23,13 @@ def master(func):
     return decorador
 
 @master
-def soma_todos(*args, ler=False):
+def soma_todos(*args):
     """
     Essa função só vai servir pra ver quando ela será acessada e colocar o momento dentro de um bloco de notas.
     """
     return reduce(lambda acu, vals: acu+vals, args, 0)
 
-var = soma_todos(11, 22, 33, 44, 55, 66, ler=False) # Não funciona se não especificarmos o valor de ler.
+var = soma_todos(11, 32, 52, 11, ler=False) # Não funciona se não especificarmos o valor de ler.
 
 
 
