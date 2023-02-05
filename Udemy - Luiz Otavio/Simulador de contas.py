@@ -1,10 +1,16 @@
+# Enunciado
+# https://github.com/luizomf/cursopython2023/commit/191fd5c3944f15c609affcdcc72fe165cabacdcc
+
+
 from abc import ABC, abstractmethod, abstractproperty
 
 class Conta(ABC):
+    def __init__(self, banco, valor_inicial=0) -> None:
+        self.dinheiro = valor_inicial
+        self.banco = banco
     
-    @abstractmethod
-    def depositar(self, valor):
-        ...
+    def depositar(self, valor_deposito):
+        self.dinheiro += valor_deposito
         
     @abstractmethod        
     def sacar(self, valor):
@@ -17,24 +23,21 @@ class Pessoa(ABC):
     def nome(self):
         ...
 
-    
     @nome.setter
     def nome(self, valor):
         ...
         
 
 class ContaCorrente(Conta):
-    def __init__(self, valor_inicial=0) -> None:
+    def __init__(self, banco, valor_inicial=0) -> None:
+        super().__init__(valor_inicial, banco)
         from random import randint
-        self.dinheiro = valor_inicial
         self.limite = randint(300, 1000)
         if self.limite > 500:
             self.juros_por_atrado = 0.5
         else:
             self.juros_por_atrado = 0.25
-    
-    def depositar(self, valor_deposito):
-        self.dinheiro += valor_deposito
+
 
     def sacar(self, valor_saque):
         if self.dinheiro + self.limite >= valor_saque:
@@ -51,9 +54,6 @@ class ContaCorrente(Conta):
 class ContaPoupanca(Conta):
     def __init__(self, valor_inicial=0) -> None:
         self.dinheiro = valor_inicial    
-    
-    def depositar(self, valor_deposito):
-        self.dinheiro += valor_deposito
         
     def sacar(self, valor_saque):
         if self.dinheiro >= valor_saque:
@@ -75,7 +75,7 @@ class Cliente(Pessoa):
     def nome(self, name: str):
         caracteres_especiais = "!@#$%¨&*()_-+=[{}^~:;><.,']"
         
-        if not isinstance(name, "str"):
+        if not isinstance(name, str):
             raise TypeError("Seu nome precisa ser do tipo string")
         
         name_has_special_characteres = any(
@@ -87,17 +87,25 @@ class Cliente(Pessoa):
 
         self._nome = name.capitalize()
 
-
+    def __str__(self) -> str:
+        return 
+    
 class Banco:
-    def __init__(self) -> None:
+    def __init__(self, num_agencia) -> None:
+        self.agencia = num_agencia
         self.clientes = []
         
     def cadastrar_cliente(self, nome_cliente, tipo_conta, dep_inicial=0):
         assert tipo_conta in ("Corrente", "Poupança"), "Tipo de conta inválida"
         if tipo_conta == "Corrente":
-            conta = ContaCorrente(dep_inicial)
+            conta = ContaCorrente(self, dep_inicial)
         else:
-            conta = ContaPoupanca(dep_inicial)
+            conta = ContaPoupanca(self, dep_inicial)
         cliente = Cliente(nome_cliente, conta)
         self.clientes.append(cliente)
-    
+        vars().update((nome_cliente, cliente)) # Como criar isso para o de baixo funcionar?
+
+bradesco = Banco("12341234")
+bradesco.cadastrar_cliente("jonas", "Corrente")
+
+# print(jonas)
