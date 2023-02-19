@@ -51,9 +51,7 @@ class ContaCorrente(Conta):
             raise Exception("Você só tem %d para saque" % self.dinheiro + self.limite)
 
 
-class ContaPoupanca(Conta):
-    def __init__(self, valor_inicial=0) -> None:
-        self.dinheiro = valor_inicial    
+class ContaPoupanca(Conta):    
         
     def sacar(self, valor_saque):
         if self.dinheiro >= valor_saque:
